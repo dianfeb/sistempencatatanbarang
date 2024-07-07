@@ -66,9 +66,13 @@
                                 <span>Data Barang</span>
                             </a>
                         </li>
-
-
-
+                        <li class="sidebar-item ">
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            <a class="sidebar-link" href="{{ route('logout') }}" onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i data-feather="log-out"></i><span>Logout</span> </a>                          
+                        </li>
                     </ul>
                 </div>
                 <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -93,13 +97,7 @@
                                 </div>
                                 <div class="d-none d-md-block d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
-                                <a class="dropdown-item active" href="#"><i data-feather="mail"></i> Messages</a>
-                                <a class="dropdown-item" href="#"><i data-feather="settings"></i> Settings</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
-                            </div>
+                            
                         </li>
                     </ul>
                 </div>

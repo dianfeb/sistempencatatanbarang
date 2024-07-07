@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\ClasificationController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ClasificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,15 +19,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
-Route::get('/dashboard', function() {
-    return view('dashboard');
-});
+
 Auth::routes();
 
 Route::middleware('auth')->group(function() {
+ Route::get('/dashboard', [DashboardController::class, 'index']);
  Route::resource('/room', RoomController::class);
  Route::resource('/klasifikasi', ClasificationController::class);
  Route::resource('/product', ProductController::class);
