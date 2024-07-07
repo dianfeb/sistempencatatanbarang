@@ -1,6 +1,8 @@
 Sistem Pencatatan Barang sederhana menggunakan Framework Laravel 10.
 
+
 CRUD menggunakan modal untuk pengambilan data agar mengurangi penggunaan pindah halaman.
+
 
 Prasyarat
 Berikut beberapa hal yang perlu diinstal terlebih dahulu:
