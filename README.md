@@ -8,12 +8,17 @@ Prasyarat
 Berikut beberapa hal yang perlu diinstal terlebih dahulu:
 
 Composer (https://getcomposer.org/)
+
 PHP ^8.2
+
 MySQL
+
 XAMPP
+
 Jika Anda menggunakan XAMPP, untuk PHP dan MySQL sudah menjadi 1 (bundle) di dalam aplikasi XAMPP
 
 Fitur
+
 CRUD Data Barang
 CRUD Data Ruangan
 CRUD Data Klasifikasi
