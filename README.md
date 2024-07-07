@@ -49,6 +49,7 @@ $ php artisan serve
 User default aplikasi untuk login
 
 Email       : admin@mail.com
+
 Password    : secret
 
 
