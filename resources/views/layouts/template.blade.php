@@ -61,32 +61,13 @@
 
                         <li class="sidebar-item ">
 
-                            <a href="index.html" class='sidebar-link'>
+                            <a href="product" class='sidebar-link'>
                                 <i data-feather="info" width="20"></i>
                                 <span>Data Barang</span>
                             </a>
                         </li>
 
 
-                        <li class="sidebar-item  has-sub">
-
-                            <a href="#" class='sidebar-link'>
-                                <i data-feather="triangle" width="20"></i>
-                                <span>Components</span>
-                            </a>
-
-
-                            <ul class="submenu ">
-                                <li>
-                                    <a href="component-alert.html">Alert</a>
-                                </li>
-
-
-                            </ul>
-
-                        </li>
-
-                        <li class='sidebar-title'>Pages</li>
 
                     </ul>
                 </div>
@@ -110,7 +91,7 @@
                                 <div class="avatar me-1">
                                     <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
                                 </div>
-                                <div class="d-none d-md-block d-lg-inline-block">Hi, Saugi</div>
+                                <div class="d-none d-md-block d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
                                 <a class="dropdown-item" href="#"><i data-feather="user"></i> Account</a>
@@ -136,7 +117,7 @@
                 </div>
                 <div class="float-end">
                     <p>Crafted with <span class='text-danger'><i data-feather="heart"></i></span> by <a
-                            href="https://saugi.me">Saugi</a></p>
+                            href="https://saugi.me">{{ auth()->user()->name }}</a></p>
                 </div>
             </div>
         </footer>

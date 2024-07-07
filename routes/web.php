@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClasificationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\RoomController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -28,6 +29,7 @@ Auth::routes();
 Route::middleware('auth')->group(function() {
  Route::resource('/room', RoomController::class);
  Route::resource('/klasifikasi', ClasificationController::class);
+ Route::resource('/product', ProductController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
