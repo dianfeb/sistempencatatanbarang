@@ -1,10 +1,12 @@
 <?php
 
+use Illuminate\Auth\Events\Login;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ClasificationController;
 
 /*
@@ -18,9 +20,7 @@ use App\Http\Controllers\ClasificationController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-});
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'index']);
 
 
 Auth::routes();

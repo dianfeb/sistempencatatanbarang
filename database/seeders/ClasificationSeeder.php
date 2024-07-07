@@ -17,7 +17,7 @@ class ClasificationSeeder extends Seeder
         $clasifications = [
             'Rusak Berat',
             'Rusak Ringan',
-            'Berat',
+            'Baik',
             
         ];
 
