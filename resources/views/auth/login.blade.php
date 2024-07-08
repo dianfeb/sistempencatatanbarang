@@ -50,7 +50,7 @@
                         <div class="hero-content w-100 min-vh-100 d-flex flex-column">
                             <div class="row g-0">
                                 <div class="col-11 col-sm-10 col-lg-9 mx-auto">
-                                    <div class="logo mt-5 mb-5 mb-md-0"> <a class="d-flex" href="index.html"
+                                    <div class="logo mt-5 mb-5 mb-md-0"> <a class="d-flex" href="/"
                                             title="Sistem Pencatatan Barang"><img src="{{ asset('assets/images/logo.svg') }}" style="width:100px;" alt="Sistem Pencatatan Barang"></a> </div>
                                 </div>
                             </div>
