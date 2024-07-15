@@ -25,7 +25,7 @@
                         data-bs-target="#default">
                         Tambah Data Produk
                     </button>
-
+                    <a href="{{ url('/products/pdf') }}" class="btn btn-success ml-auto" target="_blank">Download PDF</a>
                     <div class="mt-3">
                         @if (session('success'))
                             <div class="alert alert-success">
@@ -50,13 +50,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($data as $item)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>
-                                                
+
                                                 @if ($item->clasification->name == 'Baik')
                                                     <span class="badge bg-success">Baik</span>
                                                 @elseif ($item->clasification->name == 'Rusak Ringan')
@@ -68,22 +67,25 @@
                                             <td>{{ $item->room->name }}</td>
                                             <td>{{ $item->quantity }}</td>
                                             <td>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#inlineFormUpdate{{ $item->id }}">
-                                                    <i class="badge-circle badge-circle-white text-secondary font-medium"
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#inlineFormUpdate{{ $item->id }}"
+                                                    class="btn btn-outline-warning">
+                                                    <i class="badge-circle badge-circle-white text-secondary font-medium-1"
                                                         data-feather="edit"></i>
-                                                </button>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#inlineFormDelete{{ $item->id }}">
-                                                    <i class="badge-circle badge-circle-white text-danger font-medium"
+                                                </a>
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#inlineFormDelete{{ $item->id }}"
+                                                    class="btn btn-outline-danger">
+                                                    <i class="badge-circle badge-circle-white text-secondary font-medium-1"
                                                         data-feather="trash-2"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
 
                                         {{-- modal update --}}
-                                        <div class="modal fade text-left" id="inlineFormUpdate{{ $item->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="myModalLabel1" aria-hidden="true">
+                                        <div class="modal fade text-left" id="inlineFormUpdate{{ $item->id }}"
+                                            tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -103,7 +105,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ url('product/'.$item->id) }}" method="POST">
+                                                        <form action="{{ url('product/' . $item->id) }}" method="POST">
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="row">
@@ -116,105 +118,118 @@
                                                                     </div>
 
                                                                 </div>
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label for="basicInput">Ruangan</label>
-                                                                            <select class="choices form-select" name="room_id" value="{{ old('room_id') }}">
-                                                                                <option value="" hidden>-- choose --</option>
-                                                                                @foreach ($room as $row)
-                                                                                    @if ($row->id == $item->room_id)
-                                                                                        <option value="{{ $row->id }}" selected>{{ $row->name }}</option>
-                                                                                    @else
-                                                                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Ruangan</label>
+                                                                        <select class="choices form-select" name="room_id"
+                                                                            value="{{ old('room_id') }}">
+                                                                            <option value="" hidden>-- choose --
+                                                                            </option>
+                                                                            @foreach ($room as $row)
+                                                                                @if ($row->id == $item->room_id)
+                                                                                    <option value="{{ $row->id }}"
+                                                                                        selected>{{ $row->name }}
+                                                                                    </option>
+                                                                                @else
+                                                                                    <option value="{{ $row->id }}">
+                                                                                        {{ $row->name }}</option>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="col-md-6">
-                                                                        <div class="form-group">
-                                                                            <label for="basicInput">Klasifikasi</label>
-                                                                            <select class="choices form-select" name="clasification_id" value="{{ old('clasification_id') }}">
-                                                                                <option value="" hidden>-- choose --</option>
-                                                                                @foreach ($clasification as $row)
-                                                                                    @if ($row->id == $item->clasification_id)
-                                                                                        <option value="{{ $row->id }}" selected>{{ $row->name }}</option>
-                                                                                    @else
-                                                                                        <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </select>
-                                                                        </div>
+                                                                <div class="col-md-6">
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Klasifikasi</label>
+                                                                        <select class="choices form-select"
+                                                                            name="clasification_id"
+                                                                            value="{{ old('clasification_id') }}">
+                                                                            <option value="" hidden>-- choose --
+                                                                            </option>
+                                                                            @foreach ($clasification as $row)
+                                                                                @if ($row->id == $item->clasification_id)
+                                                                                    <option value="{{ $row->id }}"
+                                                                                        selected>{{ $row->name }}
+                                                                                    </option>
+                                                                                @else
+                                                                                    <option value="{{ $row->id }}">
+                                                                                        {{ $row->name }}</option>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        </select>
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group">
-                                                                            <label for="basicInput">Masukan Jumlah Produk</label>
-                                                                            <input type="text" class="form-control" name="quantity"
-                                                                               value="{{ old('quantity', $item->quantity) }}">
-                                                                        </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Masukan Jumlah
+                                                                            Produk</label>
+                                                                        <input type="text" class="form-control"
+                                                                            name="quantity"
+                                                                            value="{{ old('quantity', $item->quantity) }}">
                                                                     </div>
+                                                                </div>
 
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group mb-3">
-                                                                            <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                                                            <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="10">{{ old('desc', $item->desc)  }}</textarea>
-                                                                        </div>
+                                                                <div class="col-md-12">
+                                                                    <div class="form-group mb-3">
+                                                                        <label for="exampleFormControlTextarea1"
+                                                                            class="form-label">Keterangan</label>
+                                                                        <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="10">{{ old('desc', $item->desc) }}</textarea>
                                                                     </div>
+                                                                </div>
 
 
-                                                                    <button type="submit" class="btn btn-primary ml-1"
-                                                                        data-bs-dismiss="modal">
-                                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                                        <span class="d-none d-sm-block">Submit</span>
-                                                                    </button>
-                                                               
+                                                                <button type="submit" class="btn btn-primary ml-1"
+                                                                    data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Submit</span>
+                                                                </button>
                                                             </div>
+                                                        </form>
                                                     </div>
-                                                    </form>
+
                                                 </div>
-
                                             </div>
-                                        </div>
 
-                                        {{-- modal delete --}}
-                                        <div class="modal fade text-left" id="inlineFormDelete{{ $item->id }}" tabindex="-1" role="dialog"
-                                            aria-labelledby="myModalLabel1" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-scrollable" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="myModalLabel1">Hapus Data Produk</h5>
-                                                        <button type="button" class="close rounded-pill"
-                                                            data-bs-dismiss="modal" aria-label="Close">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                                height="24" viewBox="0 0 24 24" fill="none"
-                                                                stroke="currentColor" stroke-width="2"
-                                                                stroke-linecap="round" stroke-linejoin="round"
-                                                                class="feather feather-x">
-                                                                <line x1="18" y1="6" x2="6"
-                                                                    y2="18"></line>
-                                                                <line x1="6" y1="6" x2="18"
-                                                                    y2="18"></line>
-                                                            </svg>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <form action="{{ url('product/'.$item->id) }}" method="POST">
-                                                            @method('delete')
-                                                            @csrf
-                                                           
+                                            {{-- modal delete --}}
+                                            <div class="modal fade text-left" id="inlineFormDelete{{ $item->id }}"
+                                                tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-scrollable" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="myModalLabel1">Hapus Data Produk</h5>
+                                                            <button type="button" class="close rounded-pill"
+                                                                data-bs-dismiss="modal" aria-label="Close">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                    height="24" viewBox="0 0 24 24" fill="none"
+                                                                    stroke="currentColor" stroke-width="2"
+                                                                    stroke-linecap="round" stroke-linejoin="round"
+                                                                    class="feather feather-x">
+                                                                    <line x1="18" y1="6" x2="6"
+                                                                        y2="18"></line>
+                                                                    <line x1="6" y1="6" x2="18"
+                                                                        y2="18"></line>
+                                                                </svg>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <form action="{{ url('product/' . $item->id) }}" method="POST">
+                                                                @method('delete')
+                                                                @csrf
 
-                                                            <div class="mb-3">
-                                                                <p>Are u sure room, name {{ $item->name }} Delete?</p>
-                                                            </div> 
-                                                                    <button type="submit" class="btn btn-primary ml-1"
-                                                                        data-bs-dismiss="modal">
-                                                                        <i class="bx bx-check d-block d-sm-none"></i>
-                                                                        <span class="d-none d-sm-block">Submit</span>
-                                                                    </button>
-                                                               
-                                                            </div>
+
+                                                                <div class="mb-3">
+                                                                    <p>Are u sure room, name {{ $item->name }} Delete?</p>
+                                                                </div>
+                                                                <button type="submit" class="btn btn-primary ml-1"
+                                                                    data-bs-dismiss="modal">
+                                                                    <i class="bx bx-check d-block d-sm-none"></i>
+                                                                    <span class="d-none d-sm-block">Submit</span>
+                                                                </button>
+
+                                                        </div>
                                                     </div>
                                                     </form>
                                                 </div>
@@ -222,14 +237,11 @@
                                             </div>
                                         </div>
                                     @endforeach
-
-
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
-                </div>
+                 </div>
             </div>
 
         </section>
@@ -249,6 +261,8 @@
                             <line x1="6" y1="6" x2="18" y2="18"></line>
                         </svg>
                     </button>
+                    
+                    
                 </div>
                 <div class="modal-body">
                     <form action="{{ url('/product') }}" method="POST">
@@ -262,56 +276,56 @@
                                 </div>
                             </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">Ruangan</label>
-                                        <select class="choices form-select" name="room_id" value="{{ old('room_id')  }}">
-                                            <option value="" hidden>-- choose --</option>
-                                            @foreach ($room as $row)
-                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="basicInput">Ruangan</label>
+                                    <select class="choices form-select" name="room_id" value="{{ old('room_id') }}">
+                                        <option value="" hidden>-- choose --</option>
+                                        @foreach ($room as $row)
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                            </div>
 
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <label for="basicInput">Klasifikasi</label>
-                                        <select class="choices form-select" name="clasification_id" value="{{ old('clasification_id')  }}">
-                                            <option value="" hidden>-- choose --</option>
-                                            @foreach ($clasification as $row)
-                                                <option value="{{ $row->id }}">{{ $row->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="basicInput">Klasifikasi</label>
+                                    <select class="choices form-select" name="clasification_id"
+                                        value="{{ old('clasification_id') }}">
+                                        <option value="" hidden>-- choose --</option>
+                                        @foreach ($clasification as $row)
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="basicInput">Masukan Jumlah Produk</label>
-                                        <input type="text" class="form-control" name="quantity"
-                                            placeholder="Masukan Jumlah Produk">
-                                    </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="basicInput">Masukan Jumlah Produk</label>
+                                    <input type="text" class="form-control" name="quantity"
+                                        placeholder="Masukan Jumlah Produk">
                                 </div>
+                            </div>
 
-                                <div class="col-md-12">
-                                    <div class="form-group mb-3">
-                                        <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
-                                        <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="10"></textarea>
-                                    </div>
+                            <div class="col-md-12">
+                                <div class="form-group mb-3">
+                                    <label for="exampleFormControlTextarea1" class="form-label">Keterangan</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" name="desc" rows="10"></textarea>
                                 </div>
-                        </div> 
-
-                                <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
-                                    <i class="bx bx-check d-block d-sm-none"></i>
-                                    <span class="d-none d-sm-block">Submit</span>
-                                </button>
-                            
+                            </div>
                         </div>
-                </div>
-                </form>
-            </div>
 
+                        <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
+                            <i class="bx bx-check d-block d-sm-none"></i>
+                            <span class="d-none d-sm-block">Submit</span>
+                        </button>
+
+                </div>
+            </div>
+            </form>
         </div>
+
     </div>
-    </div>
+    
 @endsection

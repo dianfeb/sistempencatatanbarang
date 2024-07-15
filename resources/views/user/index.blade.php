@@ -5,14 +5,14 @@
         <div class="page-title">
             <div class="row">
                 <div class="col-12 col-md-6 order-md-1 order-last">
-                    <h3>Data Ruangan</h3>
+                    <h3>Data User</h3>
 
                 </div>
                 <div class="col-12 col-md-6 order-md-2 order-first">
                     <nav aria-label="breadcrumb" class="breadcrumb-header">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Data Ruangan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Data User</li>
                         </ol>
                     </nav>
                 </div>
@@ -21,10 +21,12 @@
         <section class="section">
             <div class="card">
                 <div class="card-header">
-                    <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
-                        data-bs-target="#default">
-                        Tambah Data Ruangan
-                    </button>
+                    @if (auth()->user()->role == 1)
+                        <button type="button" class="btn btn-outline-primary block" data-bs-toggle="modal"
+                            data-bs-target="#default">
+                            Tambah Data User
+                        </button>
+                    @endif
 
                     <div class="mt-3">
                         @if (session('success'))
@@ -41,7 +43,8 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama Ruangan</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Email</th>
                                         <th>Nama Aksi</th>
 
                                     </tr>
@@ -52,6 +55,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
+                                            <td>{{ $item->email }}</td>
                                             <td>
                                                 <a data-bs-toggle="modal"
                                                     data-bs-target="#inlineFormUpdate{{ $item->id }}"
@@ -59,14 +63,19 @@
                                                     <i class="badge-circle badge-circle-white text-secondary font-medium-1"
                                                         data-feather="edit"></i>
                                                 </a>
-                                                <a data-bs-toggle="modal"
-                                                    data-bs-target="#inlineFormDelete{{ $item->id }}"
-                                                    class="btn btn-outline-danger">
-                                                    <i class="badge-circle badge-circle-white text-secondary font-medium-1"
-                                                        data-feather="trash-2"></i>
-                                                </a>
+                                                @if (auth()->user()->role == 1)
+                                                    @if ($item->id != auth()->user()->id)
+                                                        <a data-bs-toggle="modal"
+                                                            data-bs-target="#inlineFormDelete{{ $item->id }}"
+                                                            class="btn btn-outline-danger">
+                                                            <i class="badge-circle badge-circle-white text-secondary font-medium"
+                                                                data-feather="trash-2"></i>
+                                                        </a>
+                                                    @endif
+                                                @endif
                                             </td>
                                         </tr>
+
 
                                         {{-- modal update --}}
                                         <div class="modal fade text-left" id="inlineFormUpdate{{ $item->id }}"
@@ -91,19 +100,70 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ url('room/' . $item->id) }}" method="POST">
+                                                        <form action="{{ url('user/' . $item->id) }}" method="POST">
                                                             @method('PUT')
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="col-md-12">
+
                                                                     <div class="form-group">
-                                                                        <label for="basicInput">Masukan Nama Ruangan</label>
-                                                                        <input type="text" class="form-control"
-                                                                            name="name"
+                                                                        <label for="basicInput">Name</label>
+                                                                        <input type="text"
+                                                                            class="form-control @error('name') is-invalid @enderror"
+                                                                            id="basicInput" name="name"
+                                                                            placeholder="Enter name"
                                                                             value="{{ old('name', $item->name) }}">
+                                                                        @error('name')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
                                                                     </div>
 
 
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Email</label>
+                                                                        <input type="email"
+                                                                            class="form-control @error('email') is-invalid @enderror"
+                                                                            id="basicInput" name="email"
+                                                                            placeholder="Enter Email"
+                                                                            value="{{ old('email', $item->email) }}">
+                                                                        @error('email')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+
+
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Password</label>
+                                                                        <input type="password"
+                                                                            class="form-control @error('password') is-invalid @enderror"
+                                                                            id="basicInput" name="password"
+                                                                            placeholder="Enter Password"
+                                                                            value="{{ old('password', $item->password) }}">
+                                                                        @error('password')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
+
+
+                                                                    <div class="form-group">
+                                                                        <label for="basicInput">Konfirmasi Password</label>
+                                                                        <input type="password"
+                                                                            class="form-control @error('konfirmasi_password') is-invalid @enderror"
+                                                                            id="basicInput" name="password_confirmation"
+                                                                            placeholder="Konfirmasi Password"
+                                                                            value="{{ old('konfirmasi_password', $item->password) }}">
+                                                                        @error('konfirmasi_password')
+                                                                            <div class="invalid-feedback">
+                                                                                {{ $message }}
+                                                                            </div>
+                                                                        @enderror
+                                                                    </div>
                                                                     <button type="submit" class="btn btn-primary ml-1"
                                                                         data-bs-dismiss="modal">
                                                                         <i class="bx bx-check d-block d-sm-none"></i>
@@ -118,7 +178,6 @@
                                             </div>
                                         </div>
 
-                                        {{-- modal delete --}}
                                         <div class="modal fade text-left" id="inlineFormDelete{{ $item->id }}"
                                             tabindex="-1" role="dialog" aria-labelledby="myModalLabel1"
                                             aria-hidden="true">
@@ -141,13 +200,13 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="{{ url('room/' . $item->id) }}" method="POST">
+                                                        <form action="{{ url('user/' . $item->id) }}" method="POST">
                                                             @method('delete')
                                                             @csrf
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     <div class="mb-3">
-                                                                        <p>Are u sure room, name {{ $item->name }}
+                                                                        <p>Are u sure user, name {{ $item->name }}
                                                                             Delete?</p>
                                                                     </div>
 
@@ -195,15 +254,48 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ url('/room') }}" method="POST">
+                    <form action="{{ url('/user') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label for="basicInput">Masukan Nama Ruangan</label>
+                                    <label for="basicInput">Masukan Nama Lengkap</label>
                                     <input type="text" class="form-control" name="name"
-                                        placeholder="Masukan Nama Ruangan">
+                                        placeholder="Masukan Nama Lengkap">
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Masukan Email</label>
+                                    <input type="email" class="form-control" name="email"
+                                        placeholder="Masukan Email">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        id="basicInput" name="password" placeholder="Enter Password"
+                                        value="{{ old('password') }}">
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="basicInput">Konfirmasi Password</label>
+                                    <input type="password"
+                                        class="form-control @error('konfirmasi_password') is-invalid @enderror"
+                                        id="basicInput" name="password_confirmation" placeholder="Konfirmasi Password"
+                                        value="{{ old('konfirmasi_password') }}">
+                                    @error('konfirmasi_password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div>
+
+
 
 
                                 <button type="submit" class="btn btn-primary ml-1" data-bs-dismiss="modal">
@@ -218,5 +310,4 @@
 
         </div>
     </div>
-    
 @endsection

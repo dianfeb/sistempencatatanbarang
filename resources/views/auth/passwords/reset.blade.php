@@ -6,9 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, shrink-to-fit=no">
     <link href="images/favicon.png" rel="icon" />
-    <title>Oxyy - Login and Register Form Html Template</title>
-    <meta name="description" content="Login and Register Form Html Template">
-    <meta name="author" content="harnishdesign.net">
+    <title>New Password - Sistem Pencatatan Barang</title>
+    <meta name="description" content="New Password - Sistem Pencatatan Barang">
+    <meta name="author" content="Dian Febrianto">
 
     <!-- Web Fonts
 ========================= -->
@@ -22,6 +22,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('vendor/css/stylesheet.css') }}" />
     <!-- Colors Css -->
     <link id="color-switcher" type="text/css" rel="stylesheet" href="#" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 </head>
 
 <body>
@@ -117,17 +119,11 @@
         <h5>Color Switcher</h5>
         <hr>
         <ul class="mb-0">
-            <li class="blue" data-bs-toggle="tooltip" title="Blue" data-path="#"></li>
-            <li class="indigo" data-bs-toggle="tooltip" title="Indigo" data-path="css/color-indigo.css"></li>
-            <li class="purple" data-bs-toggle="tooltip" title="Purple" data-path="css/color-purple.css"></li>
-            <li class="pink" data-bs-toggle="tooltip" title="Pink" data-path="css/color-pink.css"></li>
-            <li class="red" data-bs-toggle="tooltip" title="Red" data-path="css/color-red.css"></li>
-            <li class="orange" data-bs-toggle="tooltip" title="Orange" data-path="css/color-orange.css"></li>
-            <li class="yellow" data-bs-toggle="tooltip" title="Yellow" data-path="css/color-yellow.css"></li>
-            <li class="teal" data-bs-toggle="tooltip" title="Teal" data-path="css/color-teal.css"></li>
-            <li class="green" data-bs-toggle="tooltip" title="Green" data-path="css/color-green.css"></li>
-            <li class="cyan" data-bs-toggle="tooltip" title="Cyan" data-path="css/color-cyan.css"></li>
-            <li class="brown" data-bs-toggle="tooltip" title="Brown" data-path="css/color-brown.css"></li>
+          <li class="blue" data-bs-toggle="tooltip" title="Blue" data-path="#"></li>
+          <li class="purple" data-bs-toggle="tooltip" title="Purple" data-path="{{ asset('vendor/color/color-indigo.css') }}"></li>
+          <li class="indigo" data-bs-toggle="tooltip" title="Indigo" data-path="{{ asset('vendor/color/color-purple.css') }}"></li>
+          <li class="pink" data-bs-toggle="tooltip" title="Pink" data-path="{{ asset('vendor/color/color-pink.css') }}"></li>
+          <li class="red" data-bs-toggle="tooltip" title="Red" data-path="{{ asset('vendor/color/color-red.css') }}"></li>
         </ul>
         <button class="btn switcher-toggle"><i class="fas fa-cog"></i></button>
     </div>

@@ -53,16 +53,18 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $item->name }}</td>
                                             <td>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#inlineFormUpdate{{ $item->id }}">
-                                                    <i class="badge-circle badge-circle-white text-secondary font-medium"
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#inlineFormUpdate{{ $item->id }}"
+                                                    class="btn btn-outline-warning">
+                                                    <i class="badge-circle badge-circle-white text-secondary font-medium-1"
                                                         data-feather="edit"></i>
-                                                </button>
-                                                <button data-bs-toggle="modal"
-                                                    data-bs-target="#inlineFormDelete{{ $item->id }}">
-                                                    <i class="badge-circle badge-circle-white text-danger font-medium"
+                                                </a>
+                                                <a data-bs-toggle="modal"
+                                                    data-bs-target="#inlineFormDelete{{ $item->id }}"
+                                                    class="btn btn-outline-danger">
+                                                    <i class="badge-circle badge-circle-white text-secondary font-medium-1"
                                                         data-feather="trash-2"></i>
-                                                </button>
+                                                </a>
                                             </td>
                                         </tr>
 
@@ -213,5 +215,5 @@
 
         </div>
     </div>
-    </div>
+    
 @endsection

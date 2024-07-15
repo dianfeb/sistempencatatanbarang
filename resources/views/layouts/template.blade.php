@@ -40,24 +40,30 @@
 
                         </li>
 
-                        <li class="sidebar-item ">
+                        <li class="sidebar-title">Manajemen Data</li>
+                        @if (auth()->user()->role == 1)
+                            <li class="sidebar-item ">
 
-                            <a href="klasifikasi" class='sidebar-link'>
-                                <i data-feather="info" width="20"></i>
-                                <span>Klasifikasi</span>
-                            </a>
+                                <a href="klasifikasi" class='sidebar-link'>
+                                    <i data-feather="info" width="20"></i>
+                                    <span>Klasifikasi</span>
+                                </a>
 
-                        </li>
+                            </li>
 
-                        <li class="sidebar-item ">
+                            <li class="sidebar-item ">
 
-                            <a href="/room" class='sidebar-link'>
-                                <i data-feather="info" width="20"></i>
-                                <span>Ruangan</span>
-                            </a>
+                                <a href="/room" class='sidebar-link'>
+                                    <i data-feather="info" width="20"></i>
+                                    <span>Ruangan</span>
+                                </a>
 
 
-                        </li>
+                            </li>
+                        @endif
+
+
+
 
                         <li class="sidebar-item ">
 
@@ -66,12 +72,23 @@
                                 <span>Data Barang</span>
                             </a>
                         </li>
+                        <li class="sidebar-title">Manajemen User</li>
+                        <li class="sidebar-item ">
+
+                            <a href="user" class='sidebar-link'>
+                                <i data-feather="user" width="20"></i>
+                                <span>Data User</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-title">logout</li>
                         <li class="sidebar-item ">
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                            <a class="sidebar-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                            document.getElementById('logout-form').submit();"><i data-feather="log-out"></i><span>Logout</span> </a>                          
+                            <a class="sidebar-link" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();"><i
+                                    data-feather="log-out"></i><span>Logout</span> </a>
                         </li>
                     </ul>
                 </div>
@@ -97,7 +114,7 @@
                                 </div>
                                 <div class="d-none d-md-block d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
                             </a>
-                            
+
                         </li>
                     </ul>
                 </div>

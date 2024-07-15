@@ -6,6 +6,9 @@ use App\Models\Room;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Clasification;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Cache;
+
 
 class ProductController extends Controller
 {
@@ -20,6 +23,26 @@ class ProductController extends Controller
         $clasification = Clasification::latest()->get();
         $data = Product::with('Room', 'Clasification')->latest()->get();
         return view('product.index', compact('data', 'room', 'clasification'));
+    }
+
+    public function generatePDF()
+    {
+        $products = Product::with('Room', 'Clasification')->latest()->get();
+
+        $data = [
+            'title' => 'Product List',
+            'date' => date('m/d/Y'),
+            'products' => $products
+        ];
+    
+        $pdf = Cache::remember('products.pdf', 60, function() use ($data) {
+            return Pdf::loadView('product.printPDF', $data)->output();
+        });
+    
+        return response()->streamDownload(
+            fn() => print($pdf),
+            'products.pdf'
+        );
     }
 
   
